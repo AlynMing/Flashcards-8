@@ -7,8 +7,6 @@ A flashcard App where you can add new flashcards and edit them. Click on the que
 
 ### App Walk-though
 
-![demoGif](Media/CodePathLab2.gif)<br> 
-
 ## Required
 - [x] User can open the creation screen
 - [x] User can cancel out of the creation screen
