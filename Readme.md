@@ -3,11 +3,11 @@
 ## Lab 2
 
 ### App Description
-`TODO://` Add app description
+A flashcard App where you can add new flashcards and edit them. Click on the question to find out the answer!
 
 ### App Walk-though
 
-<img src="YOUR_GIF_URL_HERE" width=200><br>
+![demoGif](Media/CodePathLab2.gif)<br>
 
 ## Required
 - [x] User can open the creation screen
@@ -22,14 +22,10 @@
 ## Lab 1
 
 ### App Description
-`TODO://` Add app description
-
+A Flashcard App that allows you to click on your question to find out the answer!
 ### App Walk-though
-`TODO://` Add the URL to your animated app walk-though `gif` in the image tag below. Make sure the gif actually renders and animates when viewing this README. (☝️ Remove this paragraph after after adding gif)
 
 ![demoGif](Media/CodePathLab1.gif)<br>
-
-`TODO://` In the User stories section below, add an `x` between the `-[ ]` like this `- [x]` for any user story you complete. (☝️ Remove this paragraph after after checking off user stories)
 
 ## Required
 - [x] Create New Project in Xcode
