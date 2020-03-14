@@ -19,12 +19,17 @@ class CreationViewController: UIViewController {
     var initialAnswer1: String?
     var initialAnswer2: String?
     var initialAnswer3: String?
+    var isExisting: Bool!
     override func viewDidLoad() {
         super.viewDidLoad()
         QuestionInput.text = initialQuestion
         Answer1.text = initialAnswer1
         Answer2.text = initialAnswer2
         Answer3.text = initialAnswer3
+        isExisting = false
+        if initialQuestion != nil || initialQuestion != "" {
+            isExisting = true
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -46,7 +51,7 @@ class CreationViewController: UIViewController {
             present(alert, animated: true)
         } else {
         
-        flashcardsController.updateFlashcard(question: questionText!, answer1: Answer1Text!, answer2: Answer2Text!, answer3: Answer3Text!)
+            flashcardsController.updateFlashcard(question: questionText!, answer1: Answer1Text!, answer2: Answer2Text!, answer3: Answer3Text!, isExisting: isExisting)
         
         dismiss(animated: true)
         }
