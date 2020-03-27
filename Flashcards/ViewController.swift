@@ -120,69 +120,105 @@ class ViewController: UIViewController {
         let flashcard = Flashcard(question: question, correctAnswer: answer3, otherAnswers: [answer1, answer2])
         if isExisting {
             Flashcards[currentIndex] = flashcard
-            updateLabels()
-            saveAllFlashcardsToDisk()
         } else {
         Flashcards.append(flashcard)
+        print(flashcard)
         currentIndex = Flashcards.count - 1
         updateNextPrevButtons()
+        }
         updateLabels()
         saveAllFlashcardsToDisk()
+    }
+    
+    func flipFlashcard() {
+        self.topAnswer.layer.isHidden = false
+        self.middleAnswer.layer.isHidden = false
+        UIView.transition(with: cardContainer, duration: 0.3, options: .transitionFlipFromRight, animations: {
+            self.Question.isHidden = !self.Question.isHidden
+        })
+    }
+    
+    func animateCardOut(next: Bool!) {
+        if (next) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.cardContainer.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)
+        }) { (finished) in
+            
+            self.updateLabels()
+            self.animateCardIn(next: next)
+        }
+        } else {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.cardContainer.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+            }) { (finished) in
+                self.updateLabels()
+                self.animateCardIn(next: next)
+            }
+        }
+    }
+    
+    func animateCardIn(next: Bool!) {
+        if (next) {
+            cardContainer.transform = CGAffineTransform.identity.translatedBy(x:300.0,y: 0.0)
+        } else {
+            cardContainer.transform = CGAffineTransform.identity.translatedBy(x:-300.0,y: 0.0)
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.cardContainer.transform = CGAffineTransform.identity
         }
     }
 
     @IBAction func didTapCardContainer(_ sender: Any) {
-        Question.isHidden = !Question.isHidden
-        topAnswer.layer.isHidden = false
-        middleAnswer.layer.isHidden = false
+        self.flipFlashcard()
     }
     
     @IBAction func didTapTop(_ sender: Any) {
-        topAnswer.layer.isHidden = true
+        self.topAnswer.layer.isHidden = true
     }
     @IBAction func didTapMiddle(_ sender: Any) {
-        middleAnswer.layer.isHidden = true
+        self.middleAnswer.layer.isHidden = true
     }
     @IBAction func didTapBottom(_ sender: Any) {
-        Question.layer.isHidden = true
-        topAnswer.layer.isHidden = true
-        middleAnswer.layer.isHidden = true
+        self.Question.layer.isHidden = true
+        self.topAnswer.layer.isHidden = true
+        self.middleAnswer.layer.isHidden = true
     }
     
     func updateNextPrevButtons() {
         switch currentIndex {
         case 0:
-            prevButton.isEnabled = false
+            self.prevButton.isEnabled = false
         default:
-            prevButton.isEnabled = true
+            self.prevButton.isEnabled = true
         }
         switch currentIndex {
         case Flashcards.count-1:
-            nextButton.isEnabled = false
+            self.nextButton.isEnabled = false
         default:
-            nextButton.isEnabled = true
+            self.nextButton.isEnabled = true
         }
     }
     
     func updateLabels() {
         let currentFlashcard = Flashcards[currentIndex]
-        
-        Question.text = currentFlashcard.question
-        Answer.text = currentFlashcard.correctAnswer
-        topAnswer.setTitle(currentFlashcard.otherAnswers[0], for: .normal)
-        middleAnswer.setTitle(currentFlashcard.otherAnswers[1], for: .normal)
-        bottomAnswer.setTitle(currentFlashcard.correctAnswer, for: .normal)
+        print(Flashcards.count)
+        self.Question.text = currentFlashcard.question
+        self.Answer.text = currentFlashcard.correctAnswer
+        self.topAnswer.setTitle(currentFlashcard.otherAnswers[0], for: .normal)
+        self.middleAnswer.setTitle(currentFlashcard.otherAnswers[1], for: .normal)
+        self.bottomAnswer.setTitle(currentFlashcard.correctAnswer, for: .normal)
     }
     
     @IBAction func didTapPrev(_ sender: Any) {
-        currentIndex -= 1
-        updateLabels()
-        updateNextPrevButtons()
+        self.currentIndex -= 1
+        self.updateNextPrevButtons()
+        self.animateCardOut(next: false)
     }
+    
     @IBAction func didTapNext(_ sender: Any) {
-        currentIndex += 1
-        updateLabels()
-        updateNextPrevButtons()
+        self.currentIndex += 1
+        self.updateNextPrevButtons()
+        self.animateCardOut(next: true)
     }
 }
 

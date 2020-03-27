@@ -27,7 +27,7 @@ class CreationViewController: UIViewController {
         Answer2.text = initialAnswer2
         Answer3.text = initialAnswer3
         isExisting = false
-        if initialQuestion != nil || initialQuestion != "" {
+        if initialQuestion != nil {
             isExisting = true
         }
         // Do any additional setup after loading the view.
